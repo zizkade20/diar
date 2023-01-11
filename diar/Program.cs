@@ -11,38 +11,51 @@ namespace Diar
         static void Main()
         {
             Console.WriteLine("VÍTEJ V PLÁNOVAČI UDÁLOSTÍ AKA DIÁŘI :)");
-
             DisplayLeaderboard();
-            Console.WriteLine("\nChcete přidat záznam? (Y/N)");
-            string add = Console.ReadLine().ToLower();
-            switch (add)
+
+            while (true)
             {
-                case "y":
-                    Console.WriteLine("Zadej událost:");
-                    string eventos = Console.ReadLine();
-                    Console.WriteLine("Zadej datum a čas: (dd/mm/rrrr)");
-                    string datum = Console.ReadLine();
 
-                    WriteToLeaderboard(eventos, datum);
-                    DisplayLeaderboard();
+                Console.WriteLine("\nChcete přidat záznam? (Y/N)");
+                string add = Console.ReadLine().ToLower();
+                switch (add)
+                {
+                    case "y":
+                        Console.WriteLine("Zadej událost:");
+                        string eventos = Console.ReadLine();
+                        DateOnly datum;
+                        while (true)
+                        {
+                            Console.WriteLine("Zadej datum a čas: (dd/mm/rrrr)");
+                            string date = Console.ReadLine();
 
-                    break;
-                case "n":
-                    DisplayLeaderboard();
-                    break;
+                            if (DateOnly.TryParse(date, out DateOnly result))
+                            {
+                                datum = result;
+                                break;
+                            }
+                        }
+                        WriteToLeaderboard(eventos, datum);
+                        DisplayLeaderboard();
 
-                default:
-                    Console.WriteLine("vyber z nabídky");
-                    break;
+                        break;
+                    case "n":
+                        DisplayLeaderboard();
+                        break;
+
+                    default:
+                        Console.WriteLine("vyber z nabídky");
+                        break;
+                }
+
             }
-            
-            
 
-            Console.WriteLine("\npro opuštění aplikace stiskni jakoukoliv klávesu");
-            Console.ReadLine();
+
+            //Console.WriteLine("\npro opuštění aplikace stiskni jakoukoliv klávesu");
+            //Console.ReadLine();
 
         }
-        internal static bool WriteToLeaderboard(string eventt, string datee)
+        internal static bool WriteToLeaderboard(string eventt, DateOnly datee)
         {
             string FileName = "../../../leaderboard.csv";
             string personDetail = eventt + " " + datee + Environment.NewLine;
