@@ -3,24 +3,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
+
 
 namespace Diar
 {
+    class Data
+    {
+        public string Event { get; set; }
+        public DateOnly Datee { get; set; }
+    }
     class Program
     {
         static void Main()
         {
             Console.WriteLine("VÍTEJ V PLÁNOVAČI UDÁLOSTÍ AKA DIÁŘI :)");
-            DisplayLeaderboard();
-
-            while (true)
+            CreateJson();
+            bool fonks = true;
+            while (fonks)
             {
 
-                Console.WriteLine("\nChcete přidat záznam? (Y/N)");
+                Console.WriteLine("\n(P) přidat událost\n(Z) Zobrazit události\n(U) upravit událost\n(S) smazat událost\n(E) exit");
                 string add = Console.ReadLine().ToLower();
                 switch (add)
                 {
-                    case "y":
+                    case "p":
                         Console.WriteLine("Zadej událost:");
                         string eventos = Console.ReadLine();
                         DateOnly datum;
@@ -35,12 +42,21 @@ namespace Diar
                                 break;
                             }
                         }
-                        WriteToLeaderboard(eventos, datum);
-                        DisplayLeaderboard();
+                        AppendJson(eventos, datum);
+                        DeserializeJson();
 
                         break;
-                    case "n":
-                        DisplayLeaderboard();
+                    case "z":
+                        DeserializeJson();
+                        break;
+                    case "u":
+                        break;
+                    case "s":
+                        break;
+
+
+                    case "e":
+                        fonks = false;
                         break;
 
                     default:
@@ -55,31 +71,59 @@ namespace Diar
             //Console.ReadLine();
 
         }
-        internal static bool WriteToLeaderboard(string eventt, DateOnly datee)
+
+        internal static void CreateJson()
         {
-            string FileName = "../../../leaderboard.csv";
-            string personDetail = eventt + " " + datee + Environment.NewLine;
+            var path = @"../../../diar.json";
 
-            if (!File.Exists(FileName))
-            {
-                string clientHeader = Environment.NewLine;
+            string stri = "";
 
-                File.WriteAllText(FileName, clientHeader);
-            }
+            File.AppendAllText(path, stri);
+        }
 
-            File.AppendAllText(FileName, personDetail);
+        internal static bool AppendJson(string eventt, DateOnly datum)
+        {
+
+            var path = @"../../../diar.json";
+
+            var data = File.ReadAllText(path);
+
+
+
+            var nData = JsonConvert.DeserializeObject<List<Data>>(data) ?? new List<Data>();
+
+            nData.Add(new Data { Event = eventt, Datee = datum });
+
+            data = JsonConvert.SerializeObject(nData);
+
+            File.AppendAllText(path, data);
+
+            File.WriteAllText(path, data);
+
 
             return true;
         }
 
-        // Funkce na zobrazení dat z csv souboru
-        internal static void DisplayLeaderboard()
+        internal static void DeserializeJson()
         {
-            string[] leaderboard = System.IO.File.ReadAllLines(@"../../../leaderboard.csv");
-            foreach (string line in leaderboard)
+            var path = @"../../../diar.json";
+
+
+            string json = File.ReadAllText(path);
+
+            var dataList = JsonConvert.DeserializeObject<List<Data>>(json);
+
+            Console.WriteLine("");
+
+            if (dataList != null)
             {
-                Console.WriteLine(line);
+                foreach (var data in dataList)
+                {
+
+                    Console.WriteLine(data.Event + "  " + data.Datee);
+                }
             }
+
         }
 
 
