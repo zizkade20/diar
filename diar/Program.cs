@@ -30,19 +30,19 @@ namespace Diar
                     case "p":
                         Console.WriteLine("Zadej událost:");
                         string eventos = Console.ReadLine();
-                        DateOnly datum;
+                        DateOnly dejt;
                         while (true)
                         {
                             Console.WriteLine("Zadej datum a čas: (dd/mm/rrrr)");
-                            string date = Console.ReadLine();
+                            string dateInput = Console.ReadLine();
 
-                            if (DateOnly.TryParse(date, out DateOnly result))
+                            if (DateOnly.TryParse(dateInput, out DateOnly date))
                             {
-                                datum = result;
+                                dejt = date;
                                 break;
                             }
                         }
-                        AppendJson(eventos, datum);
+                        AppendJson(eventos, dejt);
                         DeserializeJson();
 
                         break;
@@ -67,9 +67,7 @@ namespace Diar
             }
 
 
-            //Console.WriteLine("\npro opuštění aplikace stiskni jakoukoliv klávesu");
-            //Console.ReadLine();
-
+           
         }
 
         internal static void CreateJson()
