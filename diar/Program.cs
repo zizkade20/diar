@@ -94,7 +94,7 @@ namespace Diar
 
             data = JsonConvert.SerializeObject(nData);
 
-            File.AppendAllText(path, data);
+            // File.AppendAllText(path, data);
 
             File.WriteAllText(path, data);
 
