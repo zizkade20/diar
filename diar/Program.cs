@@ -11,7 +11,7 @@ namespace Diar
     class Data
     {
         public string Event { get; set; }
-        public DateOnly Datee { get; set; }
+        public DateTime Datee { get; set; }
     }
     class Program
     {
@@ -19,8 +19,9 @@ namespace Diar
         {
             Console.WriteLine("VÍTEJ V PLÁNOVAČI UDÁLOSTÍ AKA DIÁŘI :)");
             CreateJson();
-            bool fonks = true;
-            while (fonks)
+            DeserializeJson();  
+            bool bulin = true;
+            while (bulin)
             {
 
                 Console.WriteLine("\n(P) přidat událost\n(Z) Zobrazit události\n(U) upravit událost\n(S) smazat událost\n(E) exit");
@@ -30,13 +31,14 @@ namespace Diar
                     case "p":
                         Console.WriteLine("Zadej událost:");
                         string eventos = Console.ReadLine();
-                        DateOnly dejt;
+                        
+                        DateTime dejt;
                         while (true)
                         {
-                            Console.WriteLine("Zadej datum a čas: (dd/mm/rrrr)");
+                            Console.WriteLine("Zadej datum a čas: (dd/mm/rrrr hh/mm)");
                             string dateInput = Console.ReadLine();
 
-                            if (DateOnly.TryParse(dateInput, out DateOnly date))
+                            if (DateTime.TryParse(dateInput, out DateTime date))
                             {
                                 dejt = date;
                                 break;
@@ -44,7 +46,9 @@ namespace Diar
                         }
                         AppendJson(eventos, dejt);
                         DeserializeJson();
-
+                            
+                        
+                        
                         break;
                     case "z":
                         DeserializeJson();
@@ -56,7 +60,7 @@ namespace Diar
 
 
                     case "e":
-                        fonks = false;
+                        bulin = false;
                         break;
 
                     default:
@@ -79,7 +83,7 @@ namespace Diar
             File.AppendAllText(path, stri);
         }
 
-        internal static bool AppendJson(string eventt, DateOnly datum)
+        internal static bool AppendJson(string eventt, DateTime datum)
         {
 
             var path = @"../../../diar.json";
@@ -110,6 +114,7 @@ namespace Diar
             string json = File.ReadAllText(path);
 
             var dataList = JsonConvert.DeserializeObject<List<Data>>(json);
+
 
             Console.WriteLine("");
 
