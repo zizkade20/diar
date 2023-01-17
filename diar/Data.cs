@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ namespace diar
             return true;
         }
 
-        public static void DeserializeJson()
+        public static void PrintJson(/*string when*/)
         {
             var path = @"../../../diar.json";
 
@@ -65,7 +66,7 @@ namespace diar
                 {
                     foreach (var data in dtList)
                     {
-
+                        
                         Console.WriteLine(data.Datee + "  " + data.Event);
                     }
                 }

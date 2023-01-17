@@ -14,7 +14,7 @@ namespace diar
         {
             Console.WriteLine("VÍTEJ V PLÁNOVAČI UDÁLOSTÍ AKA DIÁŘI :)\n\n   DATUM A ČAS      NÁZEV AKCE");
             Datas.CreateJson();
-            Datas.DeserializeJson();
+            Datas.PrintJson();
             bool bulin = true;
             while (bulin)
             {
@@ -60,18 +60,32 @@ namespace diar
                             }
                         }
                         Datas.AppendJson(eventicek, dejt);
-                        Datas.DeserializeJson();
+                        Datas.PrintJson();
 
                         break;
                     case "z":
-                        Datas.DeserializeJson();
+                        Console.WriteLine("Chcete zobrazit:\n(A) Dnešní události\n(B) Zítřejší události\n(C) Všechny události");
+                        string inpput = Console.ReadLine().ToLower();
+
+                        switch (inpput)
+                        {
+                            case "a":
+
+                                break;
+                            case "b":
+                                break;
+                            case "c":
+                                break;
+                        }
+
+                        Datas.PrintJson();
 
                         break;
                     case "u":
 
                         break;
                     case "s":
-                        Datas.DeserializeJson();
+                        Datas.PrintJson();
 
                         string volb;
                         while (true)
@@ -93,7 +107,7 @@ namespace diar
                         }
 
                         Datas.DeleteFromJson(volb);
-                        Datas.DeserializeJson();
+                        Datas.PrintJson();
                         break;
                     case "e":
                         bulin = false;
