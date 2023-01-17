@@ -16,18 +16,19 @@ namespace diar
         public string Event { get; set; }
 
     }
-    internal class Datas
+    public class Datas
     {
-        internal static void CreateJson()
+        public static void CreateJson()
         {
             var path = @"../../../diar.json";
 
             string stri = "";
 
             File.AppendAllText(path, stri);
+
         }
 
-        internal static bool AppendJson(string eventt, DateTime datum)
+        public static bool AppendJson(string eventt, DateTime datum)
         {
 
             var path = @"../../../diar.json";
@@ -42,12 +43,11 @@ namespace diar
 
 
             File.WriteAllText(path, data);
-
-
+            
             return true;
         }
 
-        internal static void DeserializeJson()
+        public static void DeserializeJson()
         {
             var path = @"../../../diar.json";
 
@@ -73,7 +73,7 @@ namespace diar
             }
 
         }
-        internal static void DeleteFromJson(string input)
+        public static void DeleteFromJson(string input)
         {
 
             var path = @"../../../diar.json";
@@ -82,9 +82,11 @@ namespace diar
 
             List<Data> records = JsonConvert.DeserializeObject<List<Data>>(json);
 
-            records.RemoveAll(x => x.Event.ToString() == input);
+            records.RemoveAll(x => x.Event == input);
 
             File.WriteAllText(path, JsonConvert.SerializeObject(records));
+
+           
 
         }
     }

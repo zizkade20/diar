@@ -24,11 +24,10 @@ namespace diar
                 switch (add)
                 {
                     case "p":
-                        DateTime dejt;
                         string eventicek;
                         while (true)
                         {
-                            Console.WriteLine("Zadej událost:");
+                            Console.WriteLine("Zadej název události:");
                             string eventInput = Console.ReadLine();
 
                             if (!string.IsNullOrEmpty(eventInput))
@@ -39,10 +38,11 @@ namespace diar
                             }
                             else
                             {
-                                Console.WriteLine("Input nesmí být prázdný");
+                                Console.WriteLine("Input nesmí být prázdný!");
                             }
 
                         }
+                        DateTime dejt;
 
                         while (true)
                         {
@@ -53,6 +53,10 @@ namespace diar
                             {
                                 dejt = date;
                                 break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Špatný formát vstupu!");
                             }
                         }
                         Datas.AppendJson(eventicek, dejt);
@@ -67,10 +71,12 @@ namespace diar
 
                         break;
                     case "s":
+                        Datas.DeserializeJson();
+
                         string volb;
                         while (true)
                         {
-                            Console.WriteLine("Napiš jméno záznamu, který chceš smazat:");
+                            Console.WriteLine("\nNapiš jméno záznamu, který chceš smazat:");
                             string volba = Console.ReadLine();
 
                             if (!string.IsNullOrEmpty(volba))
@@ -81,7 +87,7 @@ namespace diar
                             }
                             else
                             {
-                                Console.WriteLine("Input nesmí být prázdný");
+                                Console.WriteLine("Input nesmí být prázdný!\n");
                             }
 
                         }
@@ -94,7 +100,7 @@ namespace diar
                         break;
 
                     default:
-                        Console.WriteLine("vyber z nabídky");
+                        Console.WriteLine("vyber z nabídky!");
                         break;
                 }
 
