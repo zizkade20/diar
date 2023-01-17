@@ -67,7 +67,27 @@ namespace diar
 
                         break;
                     case "s":
+                        string volb;
+                        while (true)
+                        {
+                            Console.WriteLine("Napiš jméno záznamu, který chceš smazat:");
+                            string volba = Console.ReadLine();
 
+                            if (!string.IsNullOrEmpty(volba))
+                            {
+                                volb = volba;
+
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Input nesmí být prázdný");
+                            }
+
+                        }
+
+                        Datas.DeleteFromJson(volb);
+                        Datas.DeserializeJson();
                         break;
                     case "e":
                         bulin = false;

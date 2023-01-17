@@ -4,14 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 
 namespace diar
 {
     internal class Data
     {
-        public string Event { get; set; }
+        public int Id { get; set; }
         public DateTime Datee { get; set; }
+        public string Event { get; set; }
+
     }
     internal class Datas
     {
@@ -31,11 +34,9 @@ namespace diar
 
             var data = File.ReadAllText(path);
 
-
-
             var nData = JsonConvert.DeserializeObject<List<Data>>(data) ?? new List<Data>();
 
-            nData.Add(new Data { Event = eventt, Datee = datum });
+            nData.Add(new Data {Event = eventt, Datee = datum });
 
             data = JsonConvert.SerializeObject(nData);
 
@@ -70,6 +71,20 @@ namespace diar
                 }
 
             }
+
+        }
+        internal static void DeleteFromJson(string input)
+        {
+
+            var path = @"../../../diar.json";
+
+            string json = File.ReadAllText(path);
+
+            List<Data> records = JsonConvert.DeserializeObject<List<Data>>(json);
+
+            records.RemoveAll(x => x.Event.ToString() == input);
+
+            File.WriteAllText(path, JsonConvert.SerializeObject(records));
 
         }
     }
