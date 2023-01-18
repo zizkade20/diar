@@ -100,7 +100,6 @@ namespace diar
                             int volba = Convert.ToInt32(Console.ReadLine());
                             
 
-                            if (volba)
 
                             if (volba != null)
                             {
