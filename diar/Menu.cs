@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 
@@ -12,14 +13,14 @@ namespace diar
 
         internal static void Loop()
         {
-            Console.WriteLine("VÍTEJ V PLÁNOVAČI UDÁLOSTÍ AKA DIÁŘI :)\n\n   DATUM A ČAS      NÁZEV AKCE");
+            Console.WriteLine("VÍTEJ V PLÁNOVAČI UDÁLOSTÍ AKA DIÁŘI :)\n\n    DATUM A ČAS         DEN        NÁZEV UDÁLOSTI");
             Datas.CreateJson();
             Datas.PrintJson();
             bool bulin = true;
             while (bulin)
             {
 
-                Console.WriteLine("\n(P) přidat událost\n(Z) Zobrazit události\n(U) upravit událost\n(S) smazat událost\n(E) exit");
+                Console.WriteLine("\n(P) přidat událost HOTOVO\n(Z) Zobrazit události\n(H) hledat událost HOTOVO\n(U) upravit událost\n(S) smazat událost HOTOVO\n(E) exit");
                 string add = Console.ReadLine().ToLower();
                 switch (add)
                 {
@@ -46,7 +47,7 @@ namespace diar
 
                         while (true)
                         {
-                            Console.WriteLine("Zadej datum a čas: (dd/mm/rrrr hh/mm)");
+                            Console.WriteLine("Zadej datum a čas: (dd/mm/rrrr hh:mm(:ss))");
                             string dateInput = Console.ReadLine();
 
                             if (DateTime.TryParse(dateInput, out DateTime date))
@@ -81,19 +82,27 @@ namespace diar
                         Datas.PrintJson();
 
                         break;
+                    case "h":
+                        Console.WriteLine("Zadejte jméno události, kterou chcete najít:");
+                        string search = Console.ReadLine().ToLower();
+                        Datas.SearchInJson(search);
+                        break;
                     case "u":
 
                         break;
                     case "s":
                         Datas.PrintJson();
 
-                        string volb;
+                        int volb;
                         while (true)
                         {
-                            Console.WriteLine("\nNapiš jméno záznamu, který chceš smazat:");
-                            string volba = Console.ReadLine();
+                            Console.WriteLine("\nNapiš index záznamu, který chceš smazat:");
+                            int volba = Convert.ToInt32(Console.ReadLine());
+                            
 
-                            if (!string.IsNullOrEmpty(volba))
+                            if (volba)
+
+                            if (volba != null)
                             {
                                 volb = volba;
 

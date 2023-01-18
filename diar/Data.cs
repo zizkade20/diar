@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -12,7 +13,6 @@ namespace diar
 {
     internal class Data
     {
-        public int Id { get; set; }
         public DateTime Datee { get; set; }
         public string Event { get; set; }
 
@@ -28,7 +28,6 @@ namespace diar
             File.AppendAllText(path, stri);
 
         }
-
         public static bool AppendJson(string eventt, DateTime datum)
         {
 
@@ -47,7 +46,6 @@ namespace diar
             
             return true;
         }
-
         public static void PrintJson(/*string when*/)
         {
             var path = @"../../../diar.json";
@@ -56,6 +54,8 @@ namespace diar
             string json = File.ReadAllText(path);
 
             var dataList = JsonConvert.DeserializeObject<List<Data>>(json);
+
+            int index = 1;
 
             if (dataList != null)
             {
@@ -67,14 +67,15 @@ namespace diar
                     foreach (var data in dtList)
                     {
                         
-                        Console.WriteLine(data.Datee + "  " + data.Event);
+                        Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek  + ")  " + data.Event);
+
+                        index++;
                     }
+                    index = 0;
                 }
-
             }
-
         }
-        public static void DeleteFromJson(string input)
+        public static void DeleteFromJson(int input)
         {
 
             var path = @"../../../diar.json";
@@ -82,16 +83,47 @@ namespace diar
             string json = File.ReadAllText(path);
 
             List<Data> records = JsonConvert.DeserializeObject<List<Data>>(json);
+            var dtList = records.OrderBy(x => x.Datee).ToList();
 
-            records.RemoveAll(x => x.Event == input);
+            dtList.RemoveAt(input-1);
+            File.WriteAllText(path, JsonConvert.SerializeObject(dtList));
 
-            File.WriteAllText(path, JsonConvert.SerializeObject(records));
-
-           
+            
 
         }
+        public static void SearchInJson(string searchInput)
+        {
+
+            var path = @"../../../diar.json";
+
+            string json = File.ReadAllText(path);
+
+            var dataList = JsonConvert.DeserializeObject<List<Data>>(json);
+
+            if (dataList != null)
+            {
+                var dtList = dataList.OrderBy(x => x.Datee).ToList();
+                
+                Console.WriteLine("");
+                int index = 1;
+                if (dataList != null)
+                {
+                    foreach (var data in dtList)
+                    {
+                        if (data.Event == searchInput)
+                        {
+                            Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")  " + data.Event);
+
+                            index++;
+                        } 
+                       
+                    }
+                }
+            }
+
+
+
+        }
+
     }
-
-    
-
 }
