@@ -15,7 +15,8 @@ namespace diar
         {
             Console.WriteLine("VÍTEJ V PLÁNOVAČI UDÁLOSTÍ AKA DIÁŘI :)\n\n    DATUM A ČAS         DEN        NÁZEV UDÁLOSTI");
             Datas.CreateJson();
-            Datas.PrintJson();
+            Datas.PrintJson("c");
+            
             bool bulin = true;
             while (bulin)
             {
@@ -61,7 +62,7 @@ namespace diar
                             }
                         }
                         Datas.AppendJson(eventicek, dejt);
-                        Datas.PrintJson();
+                        Datas.PrintJson("c");
 
                         break;
                     case "z":
@@ -71,15 +72,22 @@ namespace diar
                         switch (inpput)
                         {
                             case "a":
+                                Datas.PrintJson(inpput);
 
                                 break;
                             case "b":
+                                Datas.PrintJson(inpput);
+
                                 break;
                             case "c":
+                                Datas.PrintJson(inpput);
+
+                                break;
+                            default:
+                                Console.WriteLine("Vyber z nabídky!");
                                 break;
                         }
 
-                        Datas.PrintJson();
 
                         break;
                     case "h":
@@ -91,31 +99,30 @@ namespace diar
 
                         break;
                     case "s":
-                        Datas.PrintJson();
+                        Datas.PrintJson("c");
 
-                        int volb;
+
+                        int bramboracek;
                         while (true)
                         {
                             Console.WriteLine("\nNapiš index záznamu, který chceš smazat:");
-                            int volba = Convert.ToInt32(Console.ReadLine());
-                            
-
-
-                            if (volba != null)
+                            int vvv;
+                            if (int.TryParse(Console.ReadLine(), out vvv))
                             {
-                                volb = volba;
+                                bramboracek = vvv;
 
                                 break;
                             }
                             else
                             {
-                                Console.WriteLine("Input nesmí být prázdný!\n");
+                                Console.WriteLine("Pouze číslo pls!");
                             }
 
+                         
                         }
 
-                        Datas.DeleteFromJson(volb);
-                        Datas.PrintJson();
+                        Datas.DeleteFromJson(bramboracek);
+                        Datas.PrintJson("c");
                         break;
                     case "e":
                         bulin = false;

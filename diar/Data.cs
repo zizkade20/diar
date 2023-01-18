@@ -46,7 +46,7 @@ namespace diar
             
             return true;
         }
-        public static void PrintJson(/*string when*/)
+        public static void PrintJson(string when)
         {
             var path = @"../../../diar.json";
 
@@ -66,8 +66,29 @@ namespace diar
                 {
                     foreach (var data in dtList)
                     {
-                        
-                        Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek  + ")  " + data.Event);
+                        if (when == "a")
+                        {
+
+                            if (data.Datee == DateTime.Today)
+                            {
+                                Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")  " + data.Event);
+
+                            }
+
+                        }
+                        if (when == "b")
+                        {
+                            if (data.Datee == DateTime.Today.AddDays(1))
+                            {
+                                Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")  " + data.Event);
+
+                            }
+                        }
+                        if (when == "c")
+                        {
+                            Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")  " + data.Event);
+
+                        }
 
                         index++;
                     }
@@ -85,7 +106,15 @@ namespace diar
             List<Data> records = JsonConvert.DeserializeObject<List<Data>>(json);
             var dtList = records.OrderBy(x => x.Datee).ToList();
 
-            dtList.RemoveAt(input-1);
+
+            if (input <= dtList.Count) 
+            {
+                dtList.RemoveAt(input - 1);
+
+            } else
+            {
+                Console.WriteLine("Vyber z nabídky!");
+            }
             File.WriteAllText(path, JsonConvert.SerializeObject(dtList));
 
             
