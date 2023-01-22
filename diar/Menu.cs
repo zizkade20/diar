@@ -13,7 +13,7 @@ namespace diar
 
         internal static void Loop()
         {
-            Console.WriteLine("VÍTEJ V PLÁNOVAČI UDÁLOSTÍ AKA DIÁŘI :)\n\n    DATUM A ČAS         DEN        NÁZEV UDÁLOSTI");
+            Console.WriteLine("VÍTEJ V PLÁNOVAČI UDÁLOSTÍ AKA DIÁŘI :)\n\n   DATUM A ČAS   DEN       NÁZEV     POZNÁMKA");
             Datas.CreateJson();
             Datas.PrintJson("c");
             
@@ -21,7 +21,7 @@ namespace diar
             while (bulin)
             {
 
-                Console.WriteLine("\n(P) přidat událost HOTOVO\n(Z) Zobrazit události\n(H) hledat událost HOTOVO\n(U) upravit událost\n(S) smazat událost HOTOVO\n(E) exit");
+                Console.WriteLine("\n(P) přidat událost \n(Z) Zobrazit události \n(H) hledat událost \n(U) upravit událost \n(S) smazat událost \n(E) exit");
                 string add = Console.ReadLine().ToLower();
                 switch (add)
                 {
@@ -44,14 +44,14 @@ namespace diar
                             }
 
                         }
-                        DateTime dejt;
+                        DateOnly dejt;
 
                         while (true)
                         {
-                            Console.WriteLine("Zadej datum a čas: (dd/mm/rrrr hh:mm(:ss))");
+                            Console.WriteLine("Zadej datum a čas: (dd/mm/rrrr)");
                             string dateInput = Console.ReadLine();
 
-                            if (DateTime.TryParse(dateInput, out DateTime date))
+                            if (DateOnly.TryParse(dateInput, out DateOnly date))
                             {
                                 dejt = date;
                                 break;
@@ -61,7 +61,25 @@ namespace diar
                                 Console.WriteLine("Špatný formát vstupu!");
                             }
                         }
-                        Datas.AppendJson(eventicek, dejt);
+                        string poznamka;
+                        while (true)
+                        {
+                            Console.WriteLine("Zadej poznámku (popis, čas, atd...):");
+                            string noteInput = Console.ReadLine();
+
+                            if (!string.IsNullOrEmpty(noteInput))
+                            {
+                                poznamka = noteInput;
+
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Input nesmí být prázdný!");
+                            }
+
+                        }
+                        Datas.AppendJson(eventicek, dejt, poznamka);
                         Datas.PrintJson("c");
 
                         break;
@@ -96,6 +114,85 @@ namespace diar
                         Datas.SearchInJson(search);
                         break;
                     case "u":
+                        Datas.PrintJson("c");
+
+
+                        int index;
+                        while (true)
+                        {
+                            Console.WriteLine("\nNapiš index záznamu, který chceš upravit:");
+                            int result;
+                            if (int.TryParse(Console.ReadLine(), out result))
+                            {
+                                index = result;
+
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Pouze číslo pls!");
+                            }
+
+
+                        }
+
+                        Datas.DeleteFromJson(index);
+
+                        string eventtt;
+                        while (true)
+                        {
+                            Console.WriteLine("Zadej název události:");
+                            string uEventInput = Console.ReadLine();
+
+                            if (!string.IsNullOrEmpty(uEventInput))
+                            {
+                                eventtt = uEventInput;
+
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Input nesmí být prázdný!");
+                            }
+
+                        }
+                        DateOnly datum;
+
+                        while (true)
+                        {
+                            Console.WriteLine("Zadej datum a čas: (dd/mm/rrrr)");
+                            string uDateInput = Console.ReadLine();
+
+                            if (DateOnly.TryParse(uDateInput, out DateOnly uDate))
+                            {
+                                datum = uDate;
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Špatný formát vstupu!");
+                            }
+                        }
+                        string uPoznamka;
+                        while (true)
+                        {
+                            Console.WriteLine("Zadej poznámku (popis, čas, atd...):");
+                            string uNoteInput = Console.ReadLine();
+
+                            if (!string.IsNullOrEmpty(uNoteInput))
+                            {
+                                uPoznamka = uNoteInput;
+
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Input nesmí být prázdný!");
+                            }
+
+                        }
+                        Datas.AppendJson(eventtt, datum, uPoznamka);
+                        Datas.PrintJson("c");
 
                         break;
                     case "s":

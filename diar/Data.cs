@@ -13,8 +13,9 @@ namespace diar
 {
     internal class Data
     {
-        public DateTime Datee { get; set; }
+        public DateOnly Datee { get; set; }
         public string Event { get; set; }
+        public string Note { get; set; }
 
     }
     public class Datas
@@ -28,7 +29,7 @@ namespace diar
             File.AppendAllText(path, stri);
 
         }
-        public static bool AppendJson(string eventt, DateTime datum)
+        public static bool AppendJson(string eventt, DateOnly datum, string note)
         {
 
             var path = @"../../../diar.json";
@@ -37,7 +38,7 @@ namespace diar
 
             var nData = JsonConvert.DeserializeObject<List<Data>>(data) ?? new List<Data>();
 
-            nData.Add(new Data {Event = eventt, Datee = datum });
+            nData.Add(new Data {Event = eventt, Datee = datum, Note = note });
 
             data = JsonConvert.SerializeObject(nData);
 
@@ -69,24 +70,24 @@ namespace diar
                         if (when == "a")
                         {
 
-                            if (data.Datee == DateTime.Today)
+                            if (data.Datee == DateOnly.FromDateTime(DateTime.Now))
                             {
-                                Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")  " + data.Event);
+                                Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")  " + data.Event + "    " + data.Note);
 
                             }
 
                         }
                         if (when == "b")
                         {
-                            if (data.Datee == DateTime.Today.AddDays(1))
+                            if (data.Datee == DateOnly.FromDateTime(DateTime.Now).AddDays(1))
                             {
-                                Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")  " + data.Event);
+                                Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")  " + data.Event + "    " + data.Note);
 
                             }
                         }
                         if (when == "c")
                         {
-                            Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")  " + data.Event);
+                            Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")  " + data.Event + "    " + data.Note);
 
                         }
 
