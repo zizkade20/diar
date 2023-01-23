@@ -10,23 +10,25 @@ namespace diar
 {
     internal class Menu
     {
-
+        // loop aplikace
         internal static void Loop()
         {
             Console.WriteLine("VÍTEJ V PLÁNOVAČI UDÁLOSTÍ AKA DIÁŘI :)\nDnes je: " + DateOnly.FromDateTime(DateTime.Now) + "\n\n   DATUM A ČAS     DEN       NÁZEV     POZNÁMKA");
+            // Vytvoření JSON souboru
             Datas.CreateJson();
+            // Zobrazení záznamů
             Datas.PrintJson("c");
             
             bool bulin = true;
             while (bulin)
             {
-
+                // menu
                 Console.WriteLine("\n(P) přidat událost \n(Z) Zobrazit události \n(H) hledat událost \n(U) upravit událost \n(S) smazat událost \n(E) exit");
                 string add = Console.ReadLine().ToLower();
                 switch (add)
                 {
                     case "p":
-                        
+                               
                         Datas.AppendJson();
                         Datas.PrintJson("c");
 
@@ -66,8 +68,8 @@ namespace diar
 
                         Datas.DeleteFromJson();
 
-                        
                         Datas.AppendJson();
+
                         Datas.PrintJson("c");
 
                         break;

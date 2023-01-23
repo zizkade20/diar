@@ -1,1 +1,27 @@
-[{"Datee":"2023-01-25","Event":"autoškola","Note":"teorie 18:00"},{"Datee":"2023-12-12","Event":"dělání cukroví","Note":"celej den"},{"Datee":"2023-12-12","Event":"kokomo","Note":""},{"Datee":"2023-12-24","Event":"Vanoce","Note":"u babicky doma"},{"Datee":"2023-11-11","Event":"kokodák","Note":""}]
+[
+  {
+    "Datee": "2023-01-25",
+    "Event": "autoškola",
+    "Note": "teorie 18:00"
+  },
+  {
+    "Datee": "2023-12-12",
+    "Event": "dělání cukroví",
+    "Note": "celej den"
+  },
+  {
+    "Datee": "2023-12-12",
+    "Event": "kokomo",
+    "Note": ""
+  },
+  {
+    "Datee": "2023-12-24",
+    "Event": "Vanoce",
+    "Note": "u babicky doma"
+  },
+  {
+    "Datee": "2023-11-11",
+    "Event": "kokodák",
+    "Note": ""
+  }
+]
