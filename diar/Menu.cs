@@ -13,7 +13,7 @@ namespace diar
 
         internal static void Loop()
         {
-            Console.WriteLine("VÍTEJ V PLÁNOVAČI UDÁLOSTÍ AKA DIÁŘI :)\n\n   DATUM A ČAS     DEN       NÁZEV     POZNÁMKA");
+            Console.WriteLine("VÍTEJ V PLÁNOVAČI UDÁLOSTÍ AKA DIÁŘI :)\nDnes je: " + DateOnly.FromDateTime(DateTime.Now) + "\n\n   DATUM A ČAS     DEN       NÁZEV     POZNÁMKA");
             Datas.CreateJson();
             Datas.PrintJson("c");
             

@@ -54,7 +54,7 @@ namespace diar
             while (true)
             {
                 Console.WriteLine("Zadej název události:");
-                string eventInput = Console.ReadLine();
+                string eventInput = Console.ReadLine().ToLower();
 
                 if (!string.IsNullOrEmpty(eventInput))
                 {
@@ -69,25 +69,11 @@ namespace diar
 
             }
             
-            string poznamka;
-            while (true)
-            {
-                Console.WriteLine("Zadej poznámku (popis, čas, atd...):");
-                string noteInput = Console.ReadLine();
+            
+            Console.WriteLine("Zadej poznámku (popis, čas, atd...):");
+            string poznamka = Console.ReadLine().ToLower();
 
-                if (!string.IsNullOrEmpty(noteInput))
-                {
-                    poznamka = noteInput;
-
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Input nesmí být prázdný!");
-                }
-
-            }
-
+                
             var path = @"../../../diar.json";
 
             var data = File.ReadAllText(path);
@@ -214,7 +200,7 @@ namespace diar
                 {
                     foreach (var data in dtList)
                     {
-                        if (data.Event == searchInput)
+                        if (data.Event.Contains(searchInput))
                         {
                             Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")  " + data.Event);
 
