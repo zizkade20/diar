@@ -11,15 +11,16 @@ using System.Xml.Linq;
 
 namespace diar
 {
+    // klása obsahující datum, název záznamu a poznámku
     public class Data
     {
         public DateOnly Datee { get; set; }
         public string Event { get; set; }
         public string Note { get; set; }
 
-    }
+    /*}
     public class Datas
-    {
+    {*/
         // metoda na vytvoření json souboru
         public static void CreateJson()
         {
@@ -112,7 +113,7 @@ namespace diar
                 
                 foreach (var data in dtList)
                 {
-                    
+                    // pokud má volání metody parametr a
                     if (when == "a")
                     {
                         // pokud se datum události rovná dnešnímu
@@ -123,6 +124,7 @@ namespace diar
                         }
 
                     }
+                    // pokud má volání metody parametr b
                     if (when == "b")
                     {
                         // pokud se datum události rovná zítřejšímu
@@ -132,6 +134,7 @@ namespace diar
 
                         }
                     }
+                    // pokud má volání metody parametr c
                     if (when == "c")
                     {
                         Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")   " + data.Event + "    " + data.Note);

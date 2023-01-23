@@ -15,9 +15,9 @@ namespace diar
         {
             Console.WriteLine("VÍTEJ V PLÁNOVAČI UDÁLOSTÍ AKA DIÁŘI :)\nDnes je: " + DateOnly.FromDateTime(DateTime.Now) + "\n\n   DATUM A ČAS     DEN       NÁZEV     POZNÁMKA");
             // Vytvoření JSON souboru
-            Datas.CreateJson();
+            Data.CreateJson();
             // Zobrazení záznamů
-            Datas.PrintJson("c");
+            Data.PrintJson("c");
             
             bool bulin = true;
             while (bulin)
@@ -29,8 +29,8 @@ namespace diar
                 {
                     case "p":
                                
-                        Datas.AppendJson();
-                        Datas.PrintJson("c");
+                        Data.AppendJson();
+                        Data.PrintJson("c");
 
                         break;
                     case "z":
@@ -40,15 +40,15 @@ namespace diar
                         switch (inpput)
                         {
                             case "a":
-                                Datas.PrintJson(inpput);
+                                Data.PrintJson(inpput);
 
                                 break;
                             case "b":
-                                Datas.PrintJson(inpput);
+                                Data.PrintJson(inpput);
 
                                 break;
                             case "c":
-                                Datas.PrintJson(inpput);
+                                Data.PrintJson(inpput);
 
                                 break;
                             default:
@@ -61,23 +61,23 @@ namespace diar
                     case "h":
                         Console.WriteLine("Zadejte jméno události, kterou chcete najít:");
                         string search = Console.ReadLine().ToLower();
-                        Datas.SearchInJson(search);
+                        Data.SearchInJson(search);
                         break;
                     case "u":
-                        Datas.PrintJson("c");
+                        Data.PrintJson("c");
 
-                        Datas.DeleteFromJson();
+                        Data.DeleteFromJson();
 
-                        Datas.AppendJson();
+                        Data.AppendJson();
 
-                        Datas.PrintJson("c");
+                        Data.PrintJson("c");
 
                         break;
                     case "s":
-                        Datas.PrintJson("c");
+                        Data.PrintJson("c");
 
-                        Datas.DeleteFromJson();
-                        Datas.PrintJson("c");
+                        Data.DeleteFromJson();
+                        Data.PrintJson("c");
                         break;
                     case "e":
                         bulin = false;
