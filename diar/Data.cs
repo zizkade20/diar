@@ -103,7 +103,8 @@ namespace diar
                 // seřazení podle datumu
                 var dtList = dataList.OrderBy(x => x.Datee).ToList();
                 Console.WriteLine("");
-                
+
+
                 foreach (var data in dtList)
                 {
                     // pokud má volání metody parametr a
@@ -143,11 +144,11 @@ namespace diar
             while (true)
             {
                 Console.WriteLine("\nNapiš index záznamu");
-                int vvv;
+                int result;
                 // pokud je input číslo
-                if (int.TryParse(Console.ReadLine(), out vvv))
+                if (int.TryParse(Console.ReadLine(), out result))
                 {
-                    input = vvv;
+                    input = result;
                     break;
                 }
                 else
