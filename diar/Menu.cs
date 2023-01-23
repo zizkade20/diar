@@ -22,16 +22,14 @@ namespace diar
             bool bulin = true;
             while (bulin)
             {
-                // menu
                 Console.WriteLine("\n(P) přidat událost \n(Z) Zobrazit události \n(H) hledat událost \n(U) upravit událost \n(S) smazat událost \n(E) exit");
                 string add = Console.ReadLine().ToLower();
+                // menu
                 switch (add)
                 {
                     case "p":
-                               
                         Data.AppendJson();
                         Data.PrintJson("c");
-
                         break;
                     case "z":
                         Console.WriteLine("Chcete zobrazit:\n(A) Dnešní události\n(B) Zítřejší události\n(C) Všechny události");
@@ -41,11 +39,9 @@ namespace diar
                         {
                             case "a":
                                 Data.PrintJson(inpput);
-
                                 break;
                             case "b":
                                 Data.PrintJson(inpput);
-
                                 break;
                             case "c":
                                 Data.PrintJson(inpput);
@@ -55,8 +51,6 @@ namespace diar
                                 Console.WriteLine("Vyber z nabídky!");
                                 break;
                         }
-
-
                         break;
                     case "h":
                         Console.WriteLine("Zadejte jméno události, kterou chcete najít:");
@@ -65,31 +59,23 @@ namespace diar
                         break;
                     case "u":
                         Data.PrintJson("c");
-
                         Data.DeleteFromJson();
-
                         Data.AppendJson();
-
                         Data.PrintJson("c");
-
                         break;
                     case "s":
                         Data.PrintJson("c");
-
                         Data.DeleteFromJson();
                         Data.PrintJson("c");
                         break;
                     case "e":
                         bulin = false;
                         break;
-
                     default:
                         Console.WriteLine("vyber z nabídky!");
                         break;
                 }
-
             }
         }
-
     }
 }

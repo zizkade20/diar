@@ -29,12 +29,10 @@ namespace diar
             string stri = "";
 
             File.AppendAllText(path, stri);
-
         }
         // metoda na přidání souboru
         public static bool AppendJson()
         {
-
             DateOnly dejt;
             // while dokud nezadá správný input
             while (true)
@@ -62,20 +60,16 @@ namespace diar
                 if (!string.IsNullOrEmpty(eventInput))
                 {
                     eventicek = eventInput;
-
                     break;
                 }
                 else
                 {
                     Console.WriteLine("Input nesmí být prázdný!");
                 }
-
             }
-            
             
             Console.WriteLine("Zadej poznámku (popis, čas, atd...):");
             string poznamka = Console.ReadLine().ToLower();
-
                 
             var path = @"../../../diar.json";
             // získání dat z jsonu
@@ -109,7 +103,6 @@ namespace diar
                 // seřazení podle datumu
                 var dtList = dataList.OrderBy(x => x.Datee).ToList();
                 Console.WriteLine("");
-
                 
                 foreach (var data in dtList)
                 {
@@ -120,9 +113,7 @@ namespace diar
                         if (data.Datee == DateOnly.FromDateTime(DateTime.Now))
                         {
                             Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")   " + data.Event + "    " + data.Note);
-
                         }
-
                     }
                     // pokud má volání metody parametr b
                     if (when == "b")
@@ -131,26 +122,21 @@ namespace diar
                         if (data.Datee == DateOnly.FromDateTime(DateTime.Now).AddDays(1))
                         {
                             Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")   " + data.Event + "    " + data.Note);
-
                         }
                     }
                     // pokud má volání metody parametr c
                     if (when == "c")
                     {
                         Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")   " + data.Event + "    " + data.Note);
-
                     }
-                    
                     index++;
                 }
                 index = 0;
-                
             }
         }
         // metoda na smazání záznamu
         public static void DeleteFromJson()
         {
-
             int input;
             // while dokud nezadá správný input
 
@@ -162,15 +148,12 @@ namespace diar
                 if (int.TryParse(Console.ReadLine(), out vvv))
                 {
                     input = vvv;
-
                     break;
                 }
                 else
                 {
                     Console.WriteLine("Pouze číslo pls!");
                 }
-
-
             }
 
             var path = @"../../../diar.json";
@@ -185,17 +168,14 @@ namespace diar
             if (input <= dtList.Count) 
             {
                 dtList.RemoveAt(input - 1);
-
             } else
             {
                 Console.WriteLine("Vyber z nabídky!");
             }
-
+            // serializace listu do jsonu
             string data = JsonConvert.SerializeObject(dtList);
-
+            // zapsání do jsonu
             File.WriteAllText(path, data);
-
-            
 
         }
         // metoda na hledání v záznamech
@@ -225,14 +205,8 @@ namespace diar
 
                         index++;
                     } 
-                       
                 }
-                
             }
-
-
-
         }
-
     }
 }
