@@ -22,7 +22,7 @@ namespace diar
     public class Datas
     {*/
         // metoda na vytvoření json souboru
-        public static void CreateJson()
+        public void CreateJson()
         {
             var path = @"../../../diar.json";
 
@@ -31,7 +31,7 @@ namespace diar
             File.AppendAllText(path, stri);
         }
         // metoda na přidání souboru
-        public static bool AppendJson()
+        public bool AppendJson()
         {
             DateOnly dejt;
             // while dokud nezadá správný input
@@ -87,7 +87,7 @@ namespace diar
             return true;
         }
         // metoda na vypsání záznamů
-        public static void PrintJson(string when)
+        public void PrintJson(string when)
         {
             var path = @"../../../diar.json";
 
@@ -136,7 +136,7 @@ namespace diar
             }
         }
         // metoda na smazání záznamu
-        public static void DeleteFromJson()
+        public void DeleteFromJson()
         {
             int input;
             // while dokud nezadá správný input
@@ -180,7 +180,7 @@ namespace diar
 
         }
         // metoda na hledání v záznamech
-        public static void SearchInJson(string searchInput)
+        public void SearchInJson(string searchInput)
         {
 
             var path = @"../../../diar.json";
