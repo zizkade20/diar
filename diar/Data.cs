@@ -11,7 +11,7 @@ using System.Xml.Linq;
 
 namespace diar
 {
-    internal class Data
+    public class Data
     {
         public DateOnly Datee { get; set; }
         public string Event { get; set; }
@@ -29,8 +29,64 @@ namespace diar
             File.AppendAllText(path, stri);
 
         }
-        public static bool AppendJson(string eventt, DateOnly datum, string note)
+        public static bool AppendJson()
         {
+
+            DateOnly dejt;
+
+            while (true)
+            {
+                Console.WriteLine("Zadej datum a čas: (dd/mm/rrrr)");
+                string dateInput = Console.ReadLine();
+
+                if (DateOnly.TryParse(dateInput, out DateOnly date))
+                {
+                    dejt = date;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Špatný formát vstupu!");
+                }
+            }
+
+            string eventicek;
+            while (true)
+            {
+                Console.WriteLine("Zadej název události:");
+                string eventInput = Console.ReadLine();
+
+                if (!string.IsNullOrEmpty(eventInput))
+                {
+                    eventicek = eventInput;
+
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Input nesmí být prázdný!");
+                }
+
+            }
+            
+            string poznamka;
+            while (true)
+            {
+                Console.WriteLine("Zadej poznámku (popis, čas, atd...):");
+                string noteInput = Console.ReadLine();
+
+                if (!string.IsNullOrEmpty(noteInput))
+                {
+                    poznamka = noteInput;
+
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Input nesmí být prázdný!");
+                }
+
+            }
 
             var path = @"../../../diar.json";
 
@@ -38,7 +94,7 @@ namespace diar
 
             var nData = JsonConvert.DeserializeObject<List<Data>>(data) ?? new List<Data>();
 
-            nData.Add(new Data {Event = eventt, Datee = datum, Note = note });
+            nData.Add(new Data {Event = eventicek, Datee = dejt, Note = poznamka });
 
             data = JsonConvert.SerializeObject(nData);
 
@@ -63,42 +119,60 @@ namespace diar
                 var dtList = dataList.OrderBy(x => x.Datee).ToList();
                 Console.WriteLine("");
 
-                if (dataList != null)
+                
+                foreach (var data in dtList)
                 {
-                    foreach (var data in dtList)
+                    if (when == "a")
                     {
-                        if (when == "a")
+
+                        if (data.Datee == DateOnly.FromDateTime(DateTime.Now))
                         {
-
-                            if (data.Datee == DateOnly.FromDateTime(DateTime.Now))
-                            {
-                                Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")  " + data.Event + "    " + data.Note);
-
-                            }
-
-                        }
-                        if (when == "b")
-                        {
-                            if (data.Datee == DateOnly.FromDateTime(DateTime.Now).AddDays(1))
-                            {
-                                Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")  " + data.Event + "    " + data.Note);
-
-                            }
-                        }
-                        if (when == "c")
-                        {
-                            Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")  " + data.Event + "    " + data.Note);
+                            Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")   " + data.Event + "    " + data.Note);
 
                         }
 
-                        index++;
                     }
-                    index = 0;
+                    if (when == "b")
+                    {
+                        if (data.Datee == DateOnly.FromDateTime(DateTime.Now).AddDays(1))
+                        {
+                            Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")   " + data.Event + "    " + data.Note);
+
+                        }
+                    }
+                    if (when == "c")
+                    {
+                        Console.WriteLine(index + ") " + data.Datee + "  (" + data.Datee.DayOfWeek + ")   " + data.Event + "    " + data.Note);
+
+                    }
+
+                    index++;
                 }
+                index = 0;
+                
             }
         }
-        public static void DeleteFromJson(int input)
+        public static void DeleteFromJson()
         {
+
+            int input;
+            while (true)
+            {
+                Console.WriteLine("\nNapiš index záznamu");
+                int vvv;
+                if (int.TryParse(Console.ReadLine(), out vvv))
+                {
+                    input = vvv;
+
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Pouze číslo pls!");
+                }
+
+
+            }
 
             var path = @"../../../diar.json";
 
